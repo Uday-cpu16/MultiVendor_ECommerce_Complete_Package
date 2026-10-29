@@ -1,0 +1,69 @@
+@startuml
+skinparam classAttributeIconSize 0
+interface Shippable {
+  +calculateShippingCost(): double
+  +generateTrackingId(): String
+}
+abstract class MarketplaceProduct {
+  -sku: String
+  -title: String
+  -vendorName: String
+  -vendorPrice: double
+  -quantity: int
+  +getSubtotal(): double
+  {abstract} +calculateFinalTax(): double
+  +calculateShippingCost(): double
+  +generateTrackingId(): String
+}
+class PhysicalProduct {
+  -weightKg: double
+  -gstRate: double
+  +calculateFinalTax(): double
+  +calculateShippingCost(): double
+  +generateTrackingId(): String
+}
+class DigitalLicense {
+  -gstRate: double
+  +calculateFinalTax(): double
+}
+class PerishableFoodItem {
+  -gstRate: double
+  -chilledPackagingRequired: boolean
+  +calculateFinalTax(): double
+  +calculateShippingCost(): double
+}
+class Inventory {
+  -stock: Map<String, Integer>
+  +synchronized addStock(sku, quantity)
+  +synchronized reserveStock(sku, quantity)
+  +synchronized getAvailableStock(sku): int
+}
+class Order {
+  -orderId: String
+  -customerName: String
+  -items: List<MarketplaceProduct>
+  -status: String
+  +addItem(product)
+}
+class InvoiceGenerator {
+  +printInvoice(order): void
+}
+class OrderFulfillmentTask {
+  -order: Order
+  -inventory: Inventory
+  +run(): void
+}
+class InvalidQuantityException
+class OutOfStockException
+MarketplaceProduct <|-- PhysicalProduct
+MarketplaceProduct <|-- DigitalLicense
+MarketplaceProduct <|-- PerishableFoodItem
+Shippable <|.. PhysicalProduct
+Shippable <|.. PerishableFoodItem
+Order o-- "many" MarketplaceProduct
+OrderFulfillmentTask --> Order
+OrderFulfillmentTask --> Inventory
+InvoiceGenerator --> Order
+Inventory ..> InvalidQuantityException
+Inventory ..> OutOfStockException
+@enduml

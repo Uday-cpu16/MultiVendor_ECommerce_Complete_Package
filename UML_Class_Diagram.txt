@@ -1,0 +1,34 @@
+UML CLASS OVERVIEW (text version)
+
+Shippable (interface)
+  + calculateShippingCost(): double
+  + generateTrackingId(): String
+
+MarketplaceProduct (abstract)
+  - sku, title, vendorName, vendorPrice, quantity (private)
+  + getSubtotal(): double
+  + calculateFinalTax(): double (abstract)
+        | inherited by
+        +-- PhysicalProduct implements Shippable
+        +-- DigitalLicense
+        +-- PerishableFoodItem implements Shippable
+
+Order
+  - orderId, customerName, items, status
+  contains many MarketplaceProduct objects
+
+Inventory
+  - stock map
+  + synchronized addStock(...)
+  + synchronized reserveStock(...)
+  + synchronized getAvailableStock(...)
+
+OrderFulfillmentTask implements Runnable
+  uses Order + Inventory; runs on a worker thread
+
+InvoiceGenerator
+  reads Order and calls polymorphic tax/shipping methods
+
+Custom checked exceptions:
+  InvalidQuantityException
+  OutOfStockException

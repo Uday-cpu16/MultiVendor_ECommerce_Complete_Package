@@ -1,0 +1,26 @@
+Fulfillment-1: order ORD-3567005E confirmed.
+\n================ MARKETPLACE TAX INVOICE ================
+Invoice / Order ID : ORD-3567005E
+Customer           : Uday S
+Date               : 29-10-2026 11:12
+Order status       : CONFIRMED / READY FOR FULFILLMENT
+---------------------------------------------------------
+Product                  Qty   Subtotal        Tax   Shipping
+Wireless Mouse             1    1200.00     216.00      60.00
+   Tracking: TRK-518AA3FA
+   Vendor: TechVendor | SKU: MOUSE-101
+Windows 11 Key             1    4500.00     810.00       0.00
+   Fulfillment: Email / digital delivery
+   Vendor: SoftwareVendor | SKU: WIN11-KEY
+Fresh Apples               2     400.00      20.00      70.00
+   Tracking: FOOD-EA62C9F4
+   Vendor: GreenFarm | SKU: FOOD-APPLE
+---------------------------------------------------------
+Subtotal:  ₹6100.00
+Total tax: ₹1046.00
+Shipping:  ₹130.00
+GRAND TOTAL: ₹7276.00
+=========================================================\n
+Remaining stock for MOUSE-101: 9
+Fulfillment-2: order ORD-8CADBC4D rejected: Not enough stock for SKU MOUSE-101. Available: 9, requested: 999
+Second order status: REJECTED
